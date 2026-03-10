@@ -1,4 +1,4 @@
-# ReceptaHub - Brander Zunsad
+# ReceptaHub - Branderson Zuniga
 
 ## Descripció
 ReceptaHub és una aplicació web que funciona com una biblioteca de receptes de cuina. Els usuaris poden explorar diferents plats, descobrir noves idees per cuinar i consultar receptes de manera senzilla.
