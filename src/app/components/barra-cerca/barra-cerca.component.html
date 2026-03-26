@@ -1,0 +1,48 @@
+<div class="barra-cerca-container">
+  <form class="cerca-form" (ngSubmit)="buscar()">
+    <div class="input-group">
+      <label for="cerca-input" class="cerca-label">Cercar receptes</label>
+
+      <div class="input-container">
+        <span class="input-icon">Cercar</span>
+
+        <input
+          type="text"
+          id="cerca-input"
+          name="cerca"
+          class="cerca-input"
+          [(ngModel)]="cercaTerme"
+          (input)="onInputChange()"
+          placeholder="Cercar receptes..."
+          minlength="3"
+        />
+
+        <button
+          type="button"
+          class="neteja-btn"
+          *ngIf="cercaTerme.length > 0"
+          (click)="esborrarCerca()"
+        >
+          X
+        </button>
+      </div>
+    </div>
+
+    <div class="validacio-container">
+      <div
+        class="error-message"
+        *ngIf="cercaTerme.length > 0 && cercaTerme.length < 3"
+      >
+        Escriu almenys 3 caràcters
+      </div>
+
+      <div class="success-message" *ngIf="cercaTerme.length >= 3">
+        Cercant "{{ cercaTerme }}"
+      </div>
+    </div>
+
+    <button type="submit" class="cerca-btn">
+      <span class="btn-text">Cercar</span>
+    </button>
+  </form>
+</div>

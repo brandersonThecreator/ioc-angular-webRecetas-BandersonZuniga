@@ -1,0 +1,129 @@
+.barra-cerca-container {
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  padding: 20px;
+
+  .cerca-form {
+    .input-group {
+      margin-bottom: 15px;
+
+      .cerca-label {
+        display: none;
+      }
+
+      .input-container {
+        position: relative;
+
+        .input-icon {
+          position: absolute;
+          left: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          font-size: 12px;
+          color: #999;
+          font-weight: bold;
+        }
+
+        .cerca-input {
+          width: 100%;
+          padding: 12px 20px 12px 80px;
+          border: 2px solid #ddd;
+          border-radius: 25px;
+          font-size: 16px;
+          outline: none;
+
+          &:focus {
+            border-color: #007bff;
+          }
+
+          &.ng-invalid-custom {
+            border-color: #dc3545;
+          }
+        }
+
+        .neteja-btn {
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: #666;
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          font-size: 12px;
+
+          &:hover {
+            background: #333;
+          }
+        }
+      }
+    }
+
+    .validacio-container {
+      min-height: 25px;
+      margin-bottom: 10px;
+
+      .error-message {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        border: 1px solid #f5c6cb;
+      }
+
+      .success-message {
+        background: #d4edda;
+        color: #155724;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 14px;
+        border: 1px solid #c3e6cb;
+      }
+    }
+
+    .cerca-btn {
+      width: 100%;
+      padding: 12px 20px;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      &:hover:not(.disabled) {
+        background: #0056b3;
+      }
+
+      &.disabled {
+        background: #666;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .cerca-stats {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+}
+
+@media (max-width: 768px) {
+  .barra-cerca-container {
+    padding: 15px;
+
+    .cerca-form .input-group .input-container .cerca-input {
+      font-size: 16px;
+    }
+  }
+}

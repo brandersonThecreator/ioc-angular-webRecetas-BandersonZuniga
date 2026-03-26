@@ -1,0 +1,28 @@
+<div class="llista-container">
+  <div class="resultats-info">
+    <p>Hi ha {{ elementsFiltrats.length }} receptes</p>
+  </div>
+
+  <div class="graella-receptes" *ngIf="elementsFiltrats.length > 0">
+    <app-targeta-element
+      *ngFor="let element of elementsFiltrats"
+      [element]="element"
+      (elementSeleccionat)="onElementSeleccionat($event)"
+    >
+    </app-targeta-element>
+  </div>
+
+  <div class="sense-resultats" *ngIf="elementsFiltrats.length === 0">
+    <div class="icona-buit">:(</div>
+    <h3>No hi ha receptes</h3>
+    <p>No trobem el que busques</p>
+    <div class="suggeriments">
+      <p><strong>Prova amb:</strong></p>
+      <ul>
+        <li>Pizza</li>
+        <li>Pasta</li>
+        <li>Hamburguesa</li>
+      </ul>
+    </div>
+  </div>
+</div>

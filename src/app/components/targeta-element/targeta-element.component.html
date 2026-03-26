@@ -1,0 +1,31 @@
+<div class="targeta-recepta" (click)="clickRecepta()">
+  <div class="imatge-container">
+    <img [src]="element.imatge" [alt]="element.nom" class="recepta-imatge" />
+    <div class="valoracio">Puntuacio: {{ element.valor }}</div>
+  </div>
+
+  <div class="contingut">
+    <h3 class="nom-recepta">{{ element.nom }}</h3>
+
+    <p class="categoria">
+      <span class="etiqueta">{{ element.categoria }}</span>
+    </p>
+
+    <div class="detalls">
+      <div class="temps">
+        <span>Temps: {{ element.temps }} min</span>
+      </div>
+      <div class="dificultat">
+        <span>{{ element.dificultat }}</span>
+      </div>
+    </div>
+
+    <div class="ingredients-preview">
+      <p class="ingredients-titol">Ingredients:</p>
+      <p class="ingredients-llista">
+        {{ element.ingredients[0] }}, {{ element.ingredients[1] }},
+        {{ element.ingredients[2] }}...
+      </p>
+    </div>
+  </div>
+</div>
