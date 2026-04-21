@@ -140,7 +140,6 @@
   }
 }
 
-// Responsive
 @media (max-width: 768px) {
   .formulari-cerca-container {
     margin: 1rem;
@@ -157,7 +156,7 @@
         font-size: 0.75rem;
 
         span {
-          display: none; // Amagar text en mòbil
+          display: none;
         }
       }
     }

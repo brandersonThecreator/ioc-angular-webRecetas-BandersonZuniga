@@ -1,14 +1,11 @@
 import { ElementApiResponse, ElementCataleg } from "../models/element.model";
 
-/**
- * Adapta un element des de l'API al model intern
- */
 export function adaptarElementApi(
   apiResponse: ElementApiResponse,
 ): ElementCataleg {
   return {
     id: apiResponse.id,
-    nom: apiResponse.name, // Usar name com a nom únic
+    nom: apiResponse.name,
     titol: apiResponse.name,
     descripcio: apiResponse.description,
     categoria: apiResponse.category,
@@ -19,9 +16,6 @@ export function adaptarElementApi(
   };
 }
 
-/**
- * Adapta un array d'elements des de l'API al model intern
- */
 export function adaptarElementsApi(
   apiResponses: ElementApiResponse[],
 ): ElementCataleg[] {

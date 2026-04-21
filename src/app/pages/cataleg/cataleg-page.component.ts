@@ -14,7 +14,6 @@ import { FormulariCercaComponent } from "../../components/formulari-cerca/formul
 export class CatalegPageComponent implements OnInit {
   private elementService = inject(ElementService);
 
-  // Exposem les signals del servei
   elements = this.elementService.elements;
   carregant = this.elementService.carregant;
   error = this.elementService.error;

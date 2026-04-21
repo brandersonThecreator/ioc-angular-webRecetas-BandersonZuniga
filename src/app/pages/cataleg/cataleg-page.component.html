@@ -8,7 +8,6 @@
     (cercaEmitida)="onCercaCanviada($event)"
   ></app-formulari-cerca>
 
-  <!-- Estat de càrrega -->
   <div *ngIf="carregant()" class="estat-carregant">
     <div class="spinner-container">
       <div class="spinner"></div>
@@ -16,7 +15,6 @@
     </div>
   </div>
 
-  <!-- Estat d'error -->
   <div *ngIf="error() && !carregant()" class="estat-error">
     <div class="error-container">
       <div class="error-icon">⚠️</div>
@@ -29,7 +27,6 @@
     </div>
   </div>
 
-  <!-- Estat d'èxit -->
   <div *ngIf="!carregant() && !error()" class="estat-exit">
     <div *ngIf="elements().length === 0" class="no-resultats">
       <p>No s'han trobat elements.</p>

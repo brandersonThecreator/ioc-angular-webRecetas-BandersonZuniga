@@ -22,21 +22,17 @@ export class PreferitsPanelComponent {
   private fb = inject(FormBuilder);
   private preferitsService = inject(PreferitsService);
 
-  // Signals derivats
   preferits = this.preferitsService.preferits;
   notes = this.preferitsService.notes;
   totalPreferits = this.preferitsService.totalPreferits;
 
-  // FormArray per gestionar les notes
   notesForm = this.fb.group({
     notes: this.fb.array([]),
   });
 
-  // Computed per verificar si hi ha preferits
   hiHaPreferits = computed(() => this.preferits().length > 0);
 
   constructor() {
-    // Sincronitzar FormArray amb les notes existents
     this.sincronitzarFormAmbNotes();
   }
 
@@ -45,12 +41,10 @@ export class PreferitsPanelComponent {
   }
 
   private sincronitzarFormAmbNotes(): void {
-    // Netejar FormArray actual
     while (this.notesArray.length !== 0) {
       this.notesArray.removeAt(0);
     }
 
-    // Afegir FormGroup per cada preferit
     this.preferits().forEach((preferit) => {
       const notaActual = this.notes()[preferit.id] || "";
       this.notesArray.push(this.crearFormGroupNota(preferit, notaActual));
@@ -71,17 +65,14 @@ export class PreferitsPanelComponent {
     });
   }
 
-  // Validador personalitzat per notes
   private validadorNotaPersonalitzat(control: any) {
     const valor = control.value;
     if (!valor) return null;
 
-    // Prohibir només caràcters especials sense text
     if (valor.match(/^[^a-zA-Z0-9\s]*$/)) {
       return { notaInvalida: true };
     }
 
-    // Prohibir paraules inapropiades (exemple)
     const paraulesProhibides = ["spam", "test123"];
     if (
       paraulesProhibides.some((paraula) =>
@@ -118,7 +109,7 @@ export class PreferitsPanelComponent {
 
   eliminarPreferit(element: ElementCataleg): void {
     this.preferitsService.eliminarPreferit(element.id);
-    this.sincronitzarFormAmbNotes(); // Resincronitzar després d'eliminar
+    this.sincronitzarFormAmbNotes();
   }
 
   netejarTotsElsPreferits(): void {
@@ -148,7 +139,6 @@ export class PreferitsPanelComponent {
     linkElement.click();
   }
 
-  // Helpers per validació
   obtenirErrorsNota(index: number): string[] {
     const formGroup = this.notesArray.at(index);
     const control = formGroup.get("nota");

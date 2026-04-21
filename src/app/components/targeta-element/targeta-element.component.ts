@@ -20,14 +20,13 @@ import { PreferitsService } from "../../services/preferits.service";
 export class TargetaElementComponent {
   @Input() element?: Element;
   @Input() elementCataleg?: ElementCataleg;
-  @Input() esPreferit?: boolean; // Input directe per casos especials
+  @Input() esPreferit?: boolean;
   @Output() elementSeleccionat = new EventEmitter<Element>();
   @Output() catalogElementSeleccionat = new EventEmitter<ElementCataleg>();
   @Output() preferitCanviat = new EventEmitter<ElementCataleg>();
 
   private preferitsService = inject(PreferitsService);
 
-  // Computed per verificar estat de preferit
   esElementPreferit = computed(() => {
     if (this.esPreferit !== undefined) return this.esPreferit;
     if (this.elementCataleg) {
@@ -48,14 +47,12 @@ export class TargetaElementComponent {
     }
   }
 
-  // Helper per determinar quin model s'està utilitzant
   get esCataleg(): boolean {
     return !!this.elementCataleg;
   }
 
-  // Gestió de preferits
-  togglePreferit(event: Event): void {
-    event.stopPropagation(); // Evitar que es triggeri el click del catàleg
+  alternarPreferit(event: Event): void {
+    event.stopPropagation();
 
     if (this.elementCataleg) {
       if (this.esElementPreferit()) {

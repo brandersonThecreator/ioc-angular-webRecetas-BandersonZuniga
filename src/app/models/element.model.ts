@@ -1,4 +1,3 @@
-// Interfície que representa l'estructura JSON que retorna l'API
 export interface ElementApiResponse {
   id: string;
   name: string;
@@ -10,7 +9,6 @@ export interface ElementApiResponse {
   is_popular: boolean;
 }
 
-// Interfície del model intern de l'aplicació
 export interface ElementCataleg {
   id: string;
   nom: string;
@@ -23,7 +21,6 @@ export interface ElementCataleg {
   esPopular: boolean;
 }
 
-// Interfície original mantinguda per compatibilitat
 export interface Element {
   id: string;
   nom: string;

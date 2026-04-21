@@ -15,6 +15,5 @@ export class AppComponent {
 
   private preferitsService = inject(PreferitsService);
 
-  // Signal per mostrar el comptador de preferits
   totalPreferits = this.preferitsService.totalPreferits;
 }
