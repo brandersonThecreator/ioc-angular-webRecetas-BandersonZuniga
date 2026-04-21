@@ -45,7 +45,7 @@
     <button
       class="btn-preferit"
       [class.preferit-actiu]="esElementPreferit()"
-      (click)="togglePreferit($event)"
+      (click)="alternarPreferit($event)"
       [attr.aria-label]="
         esElementPreferit() ? 'Eliminar dels preferits' : 'Afegir als preferits'
       "
