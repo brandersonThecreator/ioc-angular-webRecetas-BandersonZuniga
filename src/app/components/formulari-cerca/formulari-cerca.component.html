@@ -8,16 +8,8 @@
           placeholder="Cerca elements..."
           class="input-cerca"
           [class.error]="termeCerca?.invalid && termeCerca?.touched"
-          [class.validant]="estaValidant"
         />
 
-        <!-- Indicador de validació asíncrona -->
-        <div *ngIf="estaValidant" class="indicador-validant">
-          <div class="spinner-petit"></div>
-          <span>Validant...</span>
-        </div>
-
-        <!-- Botó netejar -->
         <button
           *ngIf="teTex"
           type="button"
@@ -39,11 +31,6 @@
         <div *ngIf="errorLongitudMaxima" class="error-msg">
           <span class="error-icon">⚠️</span>
           El terme de cerca no pot tenir més de 50 caràcters
-        </div>
-
-        <div *ngIf="errorSenseResultats" class="error-msg">
-          <span class="error-icon">❌</span>
-          No s'han trobat elements amb aquest terme de cerca
         </div>
       </div>
     </div>

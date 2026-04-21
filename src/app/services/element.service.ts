@@ -3,6 +3,8 @@ import { HttpClient } from "@angular/common/http";
 import { ElementCataleg, ElementApiResponse } from "../models/element.model";
 import { adaptarElementsApi } from "../adaptadors/element.adaptador";
 import { environment } from "../../environments/environment";
+import { ELEMENTS_MOCK } from "../mocks/dades-mock";
+import { of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -10,26 +12,20 @@ import { environment } from "../../environments/environment";
 export class ElementService {
   private readonly apiUrl = environment.apiBaseUrl;
 
-  // Signals privats per gestió interna
   private _elements = signal<ElementCataleg[]>([]);
   private _carregant = signal<boolean>(false);
   private _error = signal<string | null>(null);
 
-  // Signals públics de només lectura
   public readonly elements = computed(() => this._elements());
   public readonly carregant = computed(() => this._carregant());
   public readonly error = computed(() => this._error());
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Carrega els elements populars des de l'API
-   */
   obtenirPopulars(): void {
     this._carregant.set(true);
     this._error.set(null);
 
-    // Primer intenta carregar elements populars, si falla carrega tots
     this.http
       .get<ElementApiResponse[]>(`${this.apiUrl}/elements?is_popular=true`)
       .subscribe({
@@ -40,18 +36,27 @@ export class ElementService {
         },
         error: (err) => {
           console.warn(
-            "Error carregant elements populars, intentant carregar tots:",
+            "Error carregant elements populars des de l'API, usant dades mock:",
             err,
           );
-          // Si falla la consulta de populars, carrega tots els elements
-          this.carregarTotsElsElements();
+          this.usarDadesMock(true);
         },
       });
   }
 
-  /**
-   * Cerca elements per nom
-   */
+  private usarDadesMock(nomePopulars: boolean = false): void {
+    let elementsAdaptats = adaptarElementsApi(ELEMENTS_MOCK);
+
+    if (nomePopulars) {
+      elementsAdaptats = elementsAdaptats.filter(
+        (element) => element.esPopular,
+      );
+    }
+
+    this._elements.set(elementsAdaptats);
+    this._carregant.set(false);
+  }
+
   cercar(terme: string): void {
     this._carregant.set(true);
     this._error.set(null);
@@ -65,45 +70,51 @@ export class ElementService {
           this._carregant.set(false);
         },
         error: (err) => {
-          this._error.set(
-            `Error en cercar elements amb el terme "${terme}". Si us plau, comprova la connexió i torna-ho a intentar.`,
+          console.warn(
+            "Error cercant elements des de l'API, usant dades mock:",
+            err,
           );
-          this._carregant.set(false);
-          console.error("Error cercant elements:", err);
+          this.cercarEnDadesMock(terme);
         },
       });
   }
 
-  /**
-   * Carrega tots els elements des de l'API
-   */
+  private cercarEnDadesMock(terme: string): void {
+    const termeLowerCase = terme.toLowerCase();
+    const elementsFiltrats = ELEMENTS_MOCK.filter(
+      (element) =>
+        element.name.toLowerCase().includes(termeLowerCase) ||
+        element.description.toLowerCase().includes(termeLowerCase) ||
+        element.category.toLowerCase().includes(termeLowerCase),
+    );
+
+    const elementsAdaptats = adaptarElementsApi(elementsFiltrats);
+    this._elements.set(elementsAdaptats);
+    this._carregant.set(false);
+  }
+
   carregarTotsElsElements(): void {
     this.http.get<ElementApiResponse[]>(`${this.apiUrl}/elements`).subscribe({
       next: (response) => {
         const elementsAdaptats = adaptarElementsApi(response);
-        // Filtrar només els populars si existeixen
         const elementsPopulars = elementsAdaptats.filter(
           (element) => element.esPopular,
         );
-        // Si hi ha elements populars, mostrar només aquests, sinó tots
         this._elements.set(
           elementsPopulars.length > 0 ? elementsPopulars : elementsAdaptats,
         );
         this._carregant.set(false);
       },
       error: (err) => {
-        this._error.set(
-          "Error en carregar els elements. Si us plau, comprova la connexió i torna-ho a intentar.",
+        console.warn(
+          "Error carregant tots els elements des de l'API, usant dades mock:",
+          err,
         );
-        this._carregant.set(false);
-        console.error("Error carregant tots els elements:", err);
+        this.usarDadesMock(true);
       },
     });
   }
 
-  /**
-   * Carrega tots els elements sense filtrar
-   */
   obtenirTots(): void {
     this._carregant.set(true);
     this._error.set(null);
@@ -115,11 +126,11 @@ export class ElementService {
         this._carregant.set(false);
       },
       error: (err) => {
-        this._error.set(
-          "Error en carregar els elements. Si us plau, comprova la connexió i torna-ho a intentar.",
+        console.warn(
+          "Error carregant tots els elements des de l'API, usant dades mock:",
+          err,
         );
-        this._carregant.set(false);
-        console.error("Error carregant tots els elements:", err);
+        this.usarDadesMock();
       },
     });
   }
