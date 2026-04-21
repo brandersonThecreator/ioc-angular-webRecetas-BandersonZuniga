@@ -1,0 +1,124 @@
+{
+  "elements": [
+    {
+      "id": "1",
+      "name": "Paella Valenciana",
+      "image_url": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=400",
+      "description": "Autèntica paella valenciana amb arròs, pollo, conill, garrofó i mongeta tendre",
+      "price": 18.5,
+      "category": "Arròs",
+      "units_available": 8,
+      "is_popular": true
+    },
+    {
+      "id": "2",
+      "name": "Fideuà de Marisc",
+      "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400",
+      "description": "Deliciosa fideuà amb gambes, cloïsses, musclos i calamar",
+      "price": 22.0,
+      "category": "Marisc",
+      "units_available": 5,
+      "is_popular": true
+    },
+    {
+      "id": "3",
+      "name": "Gazpacho Andalús",
+      "image_url": "https://images.unsplash.com/photo-1571197119842-7d5c55d58f72?w=400",
+      "description": "Sopa freda de tomàquet, cogombre, pebre vermell i ceba",
+      "price": 8.75,
+      "category": "Sopes",
+      "units_available": 12,
+      "is_popular": false
+    },
+    {
+      "id": "4",
+      "name": "Tortilla Espanyola",
+      "image_url": "https://images.unsplash.com/photo-1582041019025-1bbfe38ea40a?w=400",
+      "description": "Clàssica tortilla de patates amb ceba, ben cuajada",
+      "price": 12.0,
+      "category": "Ous",
+      "units_available": 15,
+      "is_popular": true
+    },
+    {
+      "id": "5",
+      "name": "Crema Catalana",
+      "image_url": "https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400",
+      "description": "Postre tradicional català amb capa de sucre cremat",
+      "price": 6.5,
+      "category": "Postres",
+      "units_available": 20,
+      "is_popular": false
+    },
+    {
+      "id": "6",
+      "name": "Jamón Ibérico",
+      "image_url": "https://images.unsplash.com/photo-1604503468506-a8da13d82791?w=400",
+      "description": "Selecte jamón ibérico de bellota, tallat a mà",
+      "price": 28.0,
+      "category": "Embutits",
+      "units_available": 3,
+      "is_popular": true
+    },
+    {
+      "id": "7",
+      "name": "Pulpo a la Gallega",
+      "image_url": "https://images.unsplash.com/photo-1559847844-d72540854374?w=400",
+      "description": "Polp cuit amb patates, oli d'oliva, sal marina i pebre dolç",
+      "price": 19.25,
+      "category": "Marisc",
+      "units_available": 6,
+      "is_popular": true
+    },
+    {
+      "id": "8",
+      "name": "Croquetes de Pernil",
+      "image_url": "https://images.unsplash.com/photo-1567126015135-8c6ab7b18fe9?w=400",
+      "description": "Croquetes artesanals de pernil ibèric amb bechamel casolana",
+      "price": 11.0,
+      "category": "Tapes",
+      "units_available": 18,
+      "is_popular": false
+    },
+    {
+      "id": "9",
+      "name": "Bacallà a la Vizcaína",
+      "image_url": "https://images.unsplash.com/photo-1544681280-d926f0d1d4b1?w=400",
+      "description": "Bacallà confitat amb salsa de pebrots del piquillo",
+      "price": 24.5,
+      "category": "Peix",
+      "units_available": 4,
+      "is_popular": false
+    },
+    {
+      "id": "10",
+      "name": "Fabada Asturiana",
+      "image_url": "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400",
+      "description": "Potent fabada amb faves del granja, xoriç, morcilla i làcón",
+      "price": 16.75,
+      "category": "Llegums",
+      "units_available": 9,
+      "is_popular": true
+    },
+    {
+      "id": "11",
+      "name": "Sangria de la Casa",
+      "image_url": "https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=400",
+      "description": "Sangria casolana amb vi negre, fruita de temporada i licors",
+      "price": 14.0,
+      "category": "Begudes",
+      "units_available": 25,
+      "is_popular": false
+    },
+    {
+      "id": "12",
+      "name": "Churros amb Xocolata",
+      "image_url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400",
+      "description": "Churros acabats de fer amb xocolata espessa casolana",
+      "price": 7.25,
+      "category": "Postres",
+      "units_available": 30,
+      "is_popular": true
+    }
+  ]
+}

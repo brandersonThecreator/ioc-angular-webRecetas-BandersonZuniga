@@ -1,0 +1,51 @@
+<div class="formulari-cerca-container">
+  <form [formGroup]="formulariCerca" class="formulari-cerca">
+    <div class="camp-cerca">
+      <div class="input-container">
+        <input
+          type="text"
+          formControlName="termeCerca"
+          placeholder="Cerca elements..."
+          class="input-cerca"
+          [class.error]="termeCerca?.invalid && termeCerca?.touched"
+          [class.validant]="estaValidant"
+        />
+
+        <!-- Indicador de validació asíncrona -->
+        <div *ngIf="estaValidant" class="indicador-validant">
+          <div class="spinner-petit"></div>
+          <span>Validant...</span>
+        </div>
+
+        <!-- Botó netejar -->
+        <button
+          *ngIf="teTex"
+          type="button"
+          (click)="netejar()"
+          class="btn-netejar"
+          aria-label="Netejar cerca"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Missatges d'error -->
+      <div class="missatges-error" *ngIf="termeCerca?.touched">
+        <div *ngIf="errorLongitudMinima" class="error-msg">
+          <span class="error-icon">⚠️</span>
+          El terme de cerca ha de tenir almenys 2 caràcters
+        </div>
+
+        <div *ngIf="errorLongitudMaxima" class="error-msg">
+          <span class="error-icon">⚠️</span>
+          El terme de cerca no pot tenir més de 50 caràcters
+        </div>
+
+        <div *ngIf="errorSenseResultats" class="error-msg">
+          <span class="error-icon">❌</span>
+          No s'han trobat elements amb aquest terme de cerca
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

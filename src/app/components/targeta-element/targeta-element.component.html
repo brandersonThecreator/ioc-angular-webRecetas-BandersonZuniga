@@ -1,0 +1,78 @@
+<div *ngIf="!esCataleg" class="targeta-recepta" (click)="clickRecepta()">
+  <div class="imatge-container">
+    <img [src]="element?.imatge" [alt]="element?.nom" class="recepta-imatge" />
+    <div class="valoracio">Puntuació: {{ element?.valor }}</div>
+  </div>
+
+  <div class="contingut">
+    <h3 class="nom-recepta">{{ element?.nom }}</h3>
+
+    <p class="categoria">
+      <span class="etiqueta">{{ element?.categoria }}</span>
+    </p>
+
+    <div class="detalls">
+      <div class="temps">
+        <span>Temps: {{ element?.temps }} min</span>
+      </div>
+      <div class="dificultat">
+        <span>{{ element?.dificultat }}</span>
+      </div>
+    </div>
+
+    <div class="ingredients-preview">
+      <p class="ingredients-titol">Ingredients:</p>
+      <p class="ingredients-llista">
+        {{ element?.ingredients?.[0] }}, {{ element?.ingredients?.[1] }},
+        {{ element?.ingredients?.[2] }}...
+      </p>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="esCataleg && elementCataleg"
+  class="targeta-element-cataleg"
+  (click)="clickElementCataleg()"
+>
+  <div class="imatge-container">
+    <img
+      [src]="elementCataleg.imatgeUrl"
+      [alt]="elementCataleg.titol"
+      class="element-imatge"
+    />
+
+    <button
+      class="btn-preferit"
+      [class.preferit-actiu]="esElementPreferit()"
+      (click)="togglePreferit($event)"
+      [attr.aria-label]="
+        esElementPreferit() ? 'Eliminar dels preferits' : 'Afegir als preferits'
+      "
+    >
+      <span *ngIf="!esElementPreferit()" class="cor-buit">♡</span>
+      <span *ngIf="esElementPreferit()" class="cor-ple">❤️</span>
+    </button>
+
+    <div class="popular-badge" *ngIf="elementCataleg.esPopular">
+      <span>⭐ Popular</span>
+    </div>
+    <div class="preu">{{ elementCataleg.preu }}€</div>
+  </div>
+
+  <div class="contingut">
+    <h3 class="titol-element">{{ elementCataleg.titol }}</h3>
+
+    <p class="categoria">
+      <span class="etiqueta">{{ elementCataleg.categoria }}</span>
+    </p>
+
+    <p class="descripcio">{{ elementCataleg.descripcio }}</p>
+
+    <div class="detalls-cataleg">
+      <div class="stock" [class.stock-baix]="elementCataleg.unitats < 5">
+        <span>Stock: {{ elementCataleg.unitats }} unitats</span>
+      </div>
+    </div>
+  </div>
+</div>

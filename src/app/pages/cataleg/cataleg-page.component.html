@@ -1,0 +1,46 @@
+<div class="cataleg-container">
+  <header class="cataleg-header">
+    <h1>Catàleg d'Elements</h1>
+    <p>Descobreix els nostres elements més populars</p>
+  </header>
+
+  <app-formulari-cerca
+    (cercaEmitida)="onCercaCanviada($event)"
+  ></app-formulari-cerca>
+
+  <!-- Estat de càrrega -->
+  <div *ngIf="carregant()" class="estat-carregant">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p>Carregant elements...</p>
+    </div>
+  </div>
+
+  <!-- Estat d'error -->
+  <div *ngIf="error() && !carregant()" class="estat-error">
+    <div class="error-container">
+      <div class="error-icon">⚠️</div>
+      <h3>S'ha produït un error</h3>
+      <p>{{ error() }}</p>
+      <button class="btn-reintentar" (click)="reintentar()">
+        <span class="btn-icon">🔄</span>
+        Reintentar
+      </button>
+    </div>
+  </div>
+
+  <!-- Estat d'èxit -->
+  <div *ngIf="!carregant() && !error()" class="estat-exit">
+    <div *ngIf="elements().length === 0" class="no-resultats">
+      <p>No s'han trobat elements.</p>
+    </div>
+
+    <div *ngIf="elements().length > 0" class="elements-grid">
+      <app-targeta-element
+        *ngFor="let element of elements()"
+        [elementCataleg]="element"
+      >
+      </app-targeta-element>
+    </div>
+  </div>
+</div>

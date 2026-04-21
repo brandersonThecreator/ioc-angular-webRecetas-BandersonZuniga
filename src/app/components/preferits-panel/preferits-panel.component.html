@@ -1,0 +1,120 @@
+<div class="preferits-container">
+  <div class="preferits-header">
+    <h2>Els meus preferits</h2>
+    <div class="info-stats">
+      <span class="comptador">{{ totalPreferits() }} elements</span>
+      <button
+        *ngIf="hiHaPreferits()"
+        (click)="exportarPreferits()"
+        class="btn-exportar"
+        type="button"
+      >
+        📤 Exportar
+      </button>
+      <button
+        *ngIf="hiHaPreferits()"
+        (click)="netejarTotsElsPreferits()"
+        class="btn-netejar-tots"
+        type="button"
+      >
+        🗑️ Netejar tots
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="!hiHaPreferits()" class="sense-preferits">
+    <div class="il·lustracio">💙</div>
+    <h3>No tens cap preferit encara</h3>
+    <p>Comença explorant el catàleg i afegeix els teus elements favorits</p>
+  </div>
+
+  <div *ngIf="hiHaPreferits()" class="preferits-llista">
+    <form [formGroup]="notesForm" class="notes-form">
+      <div formArrayName="notes" class="preferits-grid">
+        <div
+          *ngFor="let elementForm of notesArray.controls; let i = index"
+          [formGroupName]="i"
+          class="preferit-item"
+        >
+          <div class="element-info">
+            <app-targeta-element
+              [elementCataleg]="preferits()[i]"
+              [esPreferit]="true"
+              (preferitCanviat)="eliminarPreferit(preferits()[i])"
+            >
+            </app-targeta-element>
+          </div>
+
+          <div class="nota-container">
+            <label [for]="'nota-' + i" class="nota-label">
+              Nota personal
+            </label>
+
+            <div class="textarea-container">
+              <textarea
+                [id]="'nota-' + i"
+                formControlName="nota"
+                placeholder="Escriu una nota sobre aquest element..."
+                class="nota-textarea"
+                [class.error]="
+                  elementForm.get('nota')?.invalid &&
+                  elementForm.get('nota')?.touched
+                "
+                rows="3"
+              >
+              </textarea>
+
+              <div class="textarea-footer">
+                <div class="caracters-info">
+                  <span class="caracters-utilitzats">
+                    {{ elementForm.get("nota")?.value?.length || 0 }}
+                  </span>
+                  <span class="caracters-limit">/ 200</span>
+                </div>
+
+                <div class="accions-nota">
+                  <button
+                    *ngIf="notaTeTex(i)"
+                    type="button"
+                    (click)="afegirNota(i)"
+                    [disabled]="elementForm.get('nota')?.invalid"
+                    class="btn-guardar-nota"
+                  >
+                    💾 Guardar
+                  </button>
+
+                  <button
+                    *ngIf="notaTeTex(i)"
+                    type="button"
+                    (click)="esborrarNota(i)"
+                    class="btn-esborrar-nota"
+                  >
+                    🗑️ Esborrar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Missatges d'error específics per aquesta nota -->
+            <div
+              class="errors-nota"
+              *ngIf="
+                elementForm.get('nota')?.invalid &&
+                elementForm.get('nota')?.touched
+              "
+            >
+              <div *ngFor="let error of obtenirErrorsNota(i)" class="error-msg">
+                ⚠️ {{ error }}
+              </div>
+            </div>
+
+            <div *ngIf="notes()[preferits()[i].id]" class="nota-guardada">
+              <strong>Nota guardada:</strong>
+              <p>{{ notes()[preferits()[i].id] }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
